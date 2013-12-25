@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Go From Test Login Action</title>
+	<style type="text/css">
+	#content{
+		width: 1000px;
+		margin: 0px auto;
+	}
+	</style>
+</head>
+<body>
+	<div id="content">
+		<form action="/login?token=test" method="post">
+			<table>
+				<tr>
+					<td>
+						<lable>用户名：</lable>
+						<input type="text" name="user">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<lable>密码：</lable>
+						<input type="text" name="pass">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="submit" value="提交">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

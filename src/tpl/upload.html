@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Go From Test File Upload Action</title>
+	<style type="text/css">
+	#content{
+		width: 1000px;
+		margin: 0px auto;
+	}
+	</style>
+</head>
+<body>
+	<div id="content">
+		<form action="/upload" method="post" enctype="multipart/form-data">
+			<table>
+				<tr>
+					<td>
+						<lable>上传：</lable>
+						<input type="file" name="upfile">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="submit" value="提交">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

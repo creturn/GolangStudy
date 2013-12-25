@@ -48,7 +48,45 @@ func startServer() {
 	}
 	fmt.Println("started server!")
 }
+
+type MyMux struct {
+}
+
+/**
+ * 路由分发器
+ * 注意此接口名称必须是ServeHTTP
+ * 因为默认路由调用的就是ServeHTTP这个接口
+ */
+func (p *MyMux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	switch r.URL.Path {
+	case "/":
+		start(w, r)
+	case "/author":
+		author(w, r)
+	case "/stat":
+		stat(w, r)
+	default:
+		http.NotFound(w, r)
+	}
+}
+
+/**
+ * 自定义路由分发测试
+ */
+func customRoute() {
+	//注意这里的MyMux 必须实现ServerHTTP接口才可以使用
+	mux := &MyMux{}
+	http.ListenAndServe(":8089", mux)
+}
+
+/**
+ * 入口函数
+ */
 func main() {
 	runtime.SetCPUProfileRate(runtime.NumCPU())
-	startServer()
+	//一般http server 处理
+	go startServer()
+	//自定义路由分发处理
+	customRoute()
+
 }
