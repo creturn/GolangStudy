@@ -3,7 +3,7 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/mattn/go-sqlite3"
 	"time"
 )
 
@@ -32,10 +32,10 @@ func checkError(err error) {
  * 获取用户列表
  */
 func getUserList() {
-	db, err := sql.Open("mysql", "root:root@/xiaozhan")
+	db, err := sql.Open("sqlite3", "./user.db")
 	checkError(err)
 	defer db.Close()
-	rows, err := db.Query("select username,password,addtime from gd_member order by id desc limit 2000")
+	rows, err := db.Query("select username,departname,created from userinfo order by username desc limit 2000")
 	for rows.Next() {
 		user := User{}
 		err := rows.Scan(&user.Username, &user.Password, &user.CreateTime)
@@ -49,12 +49,12 @@ func getUserList() {
  * 添加用户
  */
 func addUser(u User) error {
-	db, err := sql.Open("mysql", "root:root@/xiaozhan")
+	db, err := sql.Open("sqlite3", "./user.db")
 	if err != nil {
 		return err
 	}
 	defer db.Close()
-	stmt, err := db.Prepare("insert into gd_member set username=?, password=?, addtime=?")
+	stmt, err := db.Prepare("INSERT INTO userinfo(username, departname, created) values(?,?,?)")
 	if err != nil {
 		return err
 	}
@@ -76,6 +76,6 @@ func add() {
 	}
 }
 func main() {
-
+	// add()
 	getUserList()
 }
