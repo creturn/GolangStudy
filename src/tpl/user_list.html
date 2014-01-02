@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Go From Test user list Action</title>
+	<style type="text/css">
+	#content{
+		width: 1000px;
+		margin: 0px auto;
+	}
+	</style>
+</head>
+<body>
+	<div id="content">
+		<ul>
+		 	<li>test</li>
+		 	{{range .MemberList}}
+		 	<li>{{.Username}} ### {{.Password}}</li>
+		 	{{end}}
+		</ul>		 
+	</div>
+</body>
+</html>
